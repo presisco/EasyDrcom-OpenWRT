@@ -1,0 +1,7 @@
+
+easydrcom:
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -DOPENWRT -DLINUX -s -std=c++0x -o easydrcom md5.c main.cpp -lpcap -lpthread
+
+clean:
+	-rm -f *.o *.elf *.gbd
+
