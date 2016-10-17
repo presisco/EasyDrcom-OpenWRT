@@ -10,9 +10,9 @@ start()
 
 if [ $(uci get easydrcom.@login[0].boot) ] ;
 then
-	/etc/init.d/easydrcom enable
+	/etc/init.d/easydrcomd enable
 else
-	/etc/init.d/easydrcom disable
+	/etc/init.d/easydrcomd disable
 fi
 
 if [ $(uci get easydrcom.@login[0].enable) ] ;
