@@ -1,0 +1,12 @@
+#!/bin/sh /etc/rc.common
+# easydrcom script
+
+START=96
+
+start(){
+	easydrcom -b -r -c /etc/config/easydrcom.conf &
+}
+
+stop(){
+	killall easydrcom
+}

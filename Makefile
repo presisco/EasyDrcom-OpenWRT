@@ -8,7 +8,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=easydrcom
 PKG_VERSION:=0.9
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
@@ -16,7 +16,7 @@ include $(INCLUDE_DIR)/package.mk
 
 define Package/easydrcom
   SECTION:=net
-  CATEGORY:=Customized
+  CATEGORY:=Network
   DEPENDS:=+libpcap +libstdcpp +libpthread
   TITLE:=Dr.COM client
 endef
@@ -37,6 +37,7 @@ define Package/easydrcom/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/easydrcom $(1)/usr/bin
 	$(CP) -a files/* $(1)/
+	chmod 755 $(1)/etc/init.d/easydrcom
 endef
 
 
