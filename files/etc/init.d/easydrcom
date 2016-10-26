@@ -5,8 +5,15 @@ START=96
 
 start(){
 	easydrcom -b -r -c /etc/config/easydrcom.conf &
+	echo "easydrcom started"
 }
 
 stop(){
 	killall easydrcom
+	echo "easydrcom stopped"
+}
+
+restart(){
+	stop
+	start
 }
