@@ -8,9 +8,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=easydrcom
 PKG_VERSION:=0.9
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
+
+PKG_SOURCE:=master.zip
+PKG_SOURCE_URL:=https://github.com/coverxit/EasyDrcom/archive
+PKG_MD5SUM:=c2677b598480ba65174a08f0bf05b32f
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -27,7 +31,16 @@ endef
 
 define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
-	$(CP) ./src/* $(PKG_BUILD_DIR)/
+
+	unzip $(DL_DIR)/$(PKG_SOURCE) -d $(PKG_BUILD_DIR)/
+	$(CP) $(PKG_BUILD_DIR)/EasyDrcom-master/EasyDrcom/* $(PKG_BUILD_DIR)
+	
+	rm -r $(PKG_BUILD_DIR)/EasyDrcom-master
+
+	$(Build/Patch)
+#	cat ./patches/* > $(PKG_BUILD_DIR)/src/patch
+#	patch -p1 < patch
+#	$(CP) ./src/* $(PKG_BUILD_DIR)/
 endef
 
 TARGET_CFLAGS += 
@@ -40,6 +53,4 @@ define Package/easydrcom/install
 	chmod 755 $(1)/etc/init.d/easydrcom
 endef
 
-
 $(eval $(call BuildPackage,easydrcom))
-
