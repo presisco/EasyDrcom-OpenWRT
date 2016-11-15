@@ -8,13 +8,15 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=easydrcom
 PKG_VERSION:=0.9
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 PKG_SOURCE:=master.zip
 PKG_SOURCE_URL:=https://github.com/coverxit/EasyDrcom/archive
 PKG_MD5SUM:=c2677b598480ba65174a08f0bf05b32f
+
+PKG_CONFIG_DEPENDS := EASYDRCOM_DEBUG
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -23,10 +25,15 @@ define Package/easydrcom
   CATEGORY:=Network
   DEPENDS:=+libpcap +libstdcpp +libpthread
   TITLE:=Dr.COM client
+  MENU:=1
 endef
 
 define Package/easydrcom/description
   Dr.COM client
+endef
+
+define Package/easydrcom/config
+  source "$(SOURCE)/Config.in"
 endef
 
 define Build/Prepare
@@ -38,13 +45,10 @@ define Build/Prepare
 	rm -r $(PKG_BUILD_DIR)/EasyDrcom-master
 
 	$(Build/Patch)
-#	cat ./patches/* > $(PKG_BUILD_DIR)/src/patch
-#	patch -p1 < patch
-#	$(CP) ./src/* $(PKG_BUILD_DIR)/
 endef
 
 TARGET_CFLAGS += 
-TARGET_CXXFLAGS += -Wno-error=format-security 
+TARGET_CXXFLAGS += -Wno-error=format-security $(if $(CONFIG_EASYDRCOM_DEBUG),-DEASYDRCOM_DEBUG, )
 
 define Package/easydrcom/install
 	$(INSTALL_DIR) $(1)/usr/bin

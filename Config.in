@@ -1,0 +1,8 @@
+menu "Easydrcom configuration"
+	depends on PACKAGE_easydrcom
+
+config EASYDRCOM_DEBUG
+	bool "Enable Debug Output"
+	default N
+
+endmenu
