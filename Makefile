@@ -8,7 +8,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=easydrcom
 PKG_VERSION:=0.9
-PKG_RELEASE:=5
+PKG_RELEASE:=6
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
@@ -29,7 +29,7 @@ define Package/easydrcom
 endef
 
 define Package/easydrcom/description
-  Dr.COM client
+  Dr.COM client v$PKG_VERSION r$PKG_RELEASE
 endef
 
 define Package/easydrcom/config
@@ -48,7 +48,7 @@ define Build/Prepare
 endef
 
 TARGET_CFLAGS += 
-TARGET_CXXFLAGS += -Wno-error=format-security $(if $(CONFIG_EASYDRCOM_DEBUG),-DEASYDRCOM_DEBUG, )
+TARGET_CXXFLAGS += -Wno-error=format-security -DOPENWRT $(if $(CONFIG_EASYDRCOM_DEBUG),-DEASYDRCOM_DEBUG, )
 
 define Package/easydrcom/install
 	$(INSTALL_DIR) $(1)/usr/bin
