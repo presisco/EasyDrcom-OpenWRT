@@ -8,13 +8,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=easydrcom
 PKG_VERSION:=0.9
-PKG_RELEASE:=10
+PKG_RELEASE:=15
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 PKG_SOURCE:=master.zip
 PKG_SOURCE_URL:=https://github.com/presisco/EasyDrcom/archive
-PKG_MD5SUM:=3437550531c1d59f9b86535f0c909df2
+PKG_MD5SUM:=febbcdc4af81aef3aa21897e8eca9fc6
 
 PKG_CONFIG_DEPENDS := EASYDRCOM_DEBUG
 
